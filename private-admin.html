@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Private account console</title><link rel="stylesheet" href="/styles.css">
+<style>
+body{min-height:100vh;background:#0b1220;color:#e8eefc}.privateWrap{max-width:900px;margin:48px auto;padding:20px}.privateCard{background:#111c30;border:1px solid #263653;border-radius:18px;padding:24px;margin:18px 0}.privateCard input,.privateCard select{width:100%;margin:8px 0 16px}.privateGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.privateHidden{display:none!important}.privateMsg{padding:10px 0;color:#9eb4e8;overflow-wrap:anywhere}.privateTop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}@media(max-width:600px){.privateGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="privateWrap">
+  <div class="privateTop"><div><div class="eyebrow">PRIVATE ACCESS</div><h1>Account console</h1><p class="muted">Sign in with the configured owner account.</p></div><button id="privateSignOut" class="ghost privateHidden">Sign out</button></div>
+  <section id="privateLogin" class="privateCard">
+    <h2>Owner sign-in</h2><p class="muted">Only the configured owner email is authorized. Access is checked by the server.</p>
+    <button id="privateGoogle" class="googleBtn"><b>G</b> Continue with Google</button>
+    <p class="muted">Or use the owner's verified email/password account:</p>
+    <label for="privateEmail">Email</label><input id="privateEmail" type="email" autocomplete="username" placeholder="Owner email">
+    <label for="privatePassword">Password</label><input id="privatePassword" type="password" autocomplete="current-password" placeholder="Password">
+    <button id="privateEmailLogin" class="blueBtn">Sign in</button><p id="privateMessage" class="privateMsg" role="status"></p>
+  </section>
+  <section id="privatePanel" class="privateHidden">
+    <div class="privateCard"><h2>Customer balance and limit</h2>
+      <label for="customerEmail">Customer email</label><input id="customerEmail" type="email" placeholder="customer@example.com">
+      <div class="privateGrid">
+        <div><label for="adjustAction">Action</label><select id="adjustAction"><option value="credit">Add balance</option><option value="debit">Subtract balance</option><option value="limit">Set account limit</option></select></div>
+        <div><label for="adjustAmount">Amount in customer's wallet currency</label><input id="adjustAmount" type="number" min="0.01" step="0.01" placeholder="1.00"></div>
+      </div>
+      <button id="applyAdjustment" class="blueBtn">Apply change</button><p id="adjustMessage" class="privateMsg" role="status"></p>
+    </div>
+    <div class="privateCard"><div class="privateTop"><h2>Recent deposit requests</h2><button id="privateRefresh" class="softBtn">Refresh</button></div>
+      <div style="overflow:auto"><table><thead><tr><th>Reference</th><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody id="privateDeposits"><tr><td colspan="4">Loading…</td></tr></tbody></table></div>
+      <p class="muted">Pending requests do not count as paid. Confirm payments only through a verified provider webhook/reconciliation process.</p>
+    </div>
+  </section>
+</main>
+<script type="module" src="/owner-admin.js"></script>
+</body></html>
